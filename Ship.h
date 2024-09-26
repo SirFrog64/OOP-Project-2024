@@ -19,6 +19,7 @@ class Ship {
         int size;
         int cost;
         bool hit;
+        bool isAlive;
         sf::RectangleShape* body;
 
     // Sprite
@@ -32,12 +33,13 @@ class Ship {
     public:
         Ship(int size, int health, int attack_power, int rank, int hit_prob, sf::RenderWindow* window) : window(window) {
             body = new sf::RectangleShape(sf::Vector2f(size, 2*size));
-            body->setFillColor(sf::Color(135, 206, 235));
+            body->setFillColor(sf::Color::Red);
             this-> size = size;
             this-> attack_power = attack_power;
             this-> rank = rank;
             this-> hit_prob = hit_prob;
             this-> health = health;
+            this-> isAlive = true;
             srand(time(0));
         }
 
@@ -68,8 +70,14 @@ class Ship {
         }
 
         virtual void draw() {
-            window->draw(*body);
-            window->draw(shipSprite);
+            if (isAlive == true) {
+                window->draw(*body);
+                window->draw(shipSprite);
+            }
+        }
+
+        void remove_ship(Ship* target) {
+            target->isAlive = false;
         }
 
         virtual void set_position(int position_x, int position_y) {
