@@ -18,6 +18,7 @@ class Frigate : public Ship {
             this-> rank = rank;
             this-> hit_prob = hit_prob;
             this-> health = health;
+            this-> isAlive = true;
             srand(time(0));
         }
 
@@ -35,8 +36,10 @@ class Frigate : public Ship {
         }
 
         void draw() {
-            window->draw(*body);
-            window->draw(frigateSprite);
+            if (isAlive == true) {
+                window->draw(*body);
+                window->draw(frigateSprite);
+            }
         }
 
         void attack(Ship* target) {
