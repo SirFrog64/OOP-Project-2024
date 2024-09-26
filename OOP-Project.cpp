@@ -15,6 +15,8 @@ class Boats_N_Battles {
     public:
         Boats_N_Battles(int size, std::string title) {
             window = new sf::RenderWindow(sf::VideoMode(2*size, size), title);
+            window->setVerticalSyncEnabled(true);
+            window->setFramerateLimit(60);
         }
 
         void run_game() {
@@ -23,6 +25,11 @@ class Boats_N_Battles {
             Ship* fr1 = new Frigate(20, 100, 80, 1, 60, window);
             fr1->render(50, 150);
             fr1->set_position(50, 150);
+
+            // Define a rectangle shape for bounds
+            sf::RectangleShape button(sf::Vector2f(200, 100));
+            button.setPosition(300, 250); // Position it in the window
+            button.setFillColor(sf::Color::Green);
 
             while(window->isOpen()) {
                 Event event;
@@ -33,8 +40,21 @@ class Boats_N_Battles {
                     }
                 }
 
+                if (Keyboard::isKeyPressed(Keyboard::A)) {
+                    fr1->remove_ship(fr1);
+                }
+
+                Vector2i mousePos = Mouse::getPosition(*window);
+                    
+                // Check if mouse position is within the bounds of the button
+                if (button.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+                    // Mouse is within the button bounds
+                    fr1->remove_ship(fr1);
+                }
+
                 window->clear(sf::Color(135, 206, 235));
                 fr1->draw();
+                window->draw(button);
                 window->display();   
             }
         }
@@ -46,7 +66,6 @@ class Boats_N_Battles {
 
 int main() {
     Boats_N_Battles b1(1000, "Boats 'n Battles");
-
 
     b1.run_game();
 
