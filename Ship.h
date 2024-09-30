@@ -18,6 +18,7 @@ class Ship {
         int size;
         int cost;
         bool hit;
+        bool isAlive;
         sf::RectangleShape* body;
 
         // Ship Sprite
