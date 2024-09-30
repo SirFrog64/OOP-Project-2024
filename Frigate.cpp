@@ -5,6 +5,7 @@
 #include "Frigate.h"
 
 Frigate::Frigate(int size, int cost, int health, int attack_power, int rank, int hit_prob, sf::RenderWindow* window) : Ship(size, cost, health, attack_power, rank, hit_prob, window) {
+    this-> isAlive = true;
     srand(time(0));
 }
 
