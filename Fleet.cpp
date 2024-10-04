@@ -15,17 +15,17 @@ int Fleet::get_num_ships() {
 }
 
 vector<Ship*> Fleet::get_ships() {
-    return fleet;
+    return fleet; // Return the fleet vector
 }
 
 void Fleet::add_ship(Ship* ship) {
-    fleet.push_back(ship);
+    fleet.push_back(ship); // Using the push_back function, add a ship to the next element in the vector
 }
 
 void Fleet::remove_ship(Ship* ship) {
-    auto iterator = find(fleet.begin(), fleet.end(), ship);
+    auto iterator = find(fleet.begin(), fleet.end(), ship); // Create an iterator that iterates from the start to the end.
 
     if (iterator != fleet.end()) {
-        fleet.erase(iterator);
+        fleet.erase(iterator); // If the iterator finds the ship, erase it from the vector
     }
 }
